@@ -59,7 +59,8 @@ public class PlayerOneMovement : MonoBehaviour
 
 		if (m_Grounded && jump)
 		{
-			m_Grounded = false;
+			animator.SetBool("isJump", true);
+			m_Grounded = true;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 		}
 	}
@@ -72,13 +73,18 @@ public class PlayerOneMovement : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
+	public void onLanding()
+	{
+		animator.SetBool("isJump", false);
+		Debug.Log("landed");
+	}
+
 	private void Update()
 	{
 		// Use unique input axes for Player 1
 		float move = Input.GetAxisRaw("Horizontal_P1"); // Use Player 1-specific horizontal axis
 		bool jump = Input.GetButtonDown("Jump_P1"); // Use Player 1-specific jump button
 		animator.SetFloat("speed", Mathf.Abs(move));
-
 		Move(move, jump);
 	}
 }

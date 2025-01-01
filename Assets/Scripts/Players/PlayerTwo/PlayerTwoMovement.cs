@@ -16,7 +16,7 @@ public class PlayerTwoMovement : MonoBehaviour
     private Vector3 m_Velocity = Vector3.zero;
 
     Animator animator;
-
+    
     [Header("Events")]
     [Space]
 
@@ -57,7 +57,7 @@ public class PlayerTwoMovement : MonoBehaviour
         bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);  // Directly check the button press
 
         animator.SetFloat("speed", Mathf.Abs(move));
-
+        // animator.SetBool("isGrounded", m_Grounded);
 
         // Pass inputs to the Move function
         Move(move, jump);
