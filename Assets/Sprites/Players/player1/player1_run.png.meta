@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 6ae7103a7aba3554cb184fc1eb54bc3b
+guid: 1338664462a6cf245923dfbd1b798b32
 TextureImporter:
   fileIDToRecycleName:
-    21300000: player1_0
-    21300002: player1_1
-    21300004: player1_2
-    21300006: player1_3
+    21300000: player1_run_0
+    21300002: player1_run_1
+    21300004: player1_run_2
+    21300006: player1_run_3
+    21300008: player1_run_4
+    21300010: player1_run_5
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -86,81 +88,121 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player1_0
+      name: player1_run_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 6
         y: 0
         width: 18
         height: 22
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06a48b30dd6c4d74482ec6967b2f8d34
+      spriteID: b81717066f9a3bc4e8e2b5b93a012968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player1_1
+      name: player1_run_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
-        width: 19
-        height: 21
+        width: 20
+        height: 22
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 919e6429f0f67174da57619fde0bde5c
+      spriteID: 3a3ce6be4a6d6a74eb89fb79206dbf69
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player1_2
+      name: player1_run_2
       rect:
         serializedVersion: 2
-        x: 62
+        x: 60
         y: 0
-        width: 21
-        height: 20
+        width: 18
+        height: 22
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ddb924287027f64ea8db53095d3d537
+      spriteID: 720d8e48bc50deb4b9bdd4bcebeac5fd
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player1_3
+      name: player1_run_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 85
         y: 0
-        width: 19
-        height: 21
+        width: 18
+        height: 23
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba94b83ae48cdbb41a486b82f290f985
+      spriteID: d1f9ff01e4503254cb969d84bfbb2a52
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player1_run_4
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 0
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d621c86ccf22a94d9aa521fb715ad8f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player1_run_5
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 0
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62da5730f78b7614cb867b67e0f97b5e
       vertices: []
       indices: 
       edges: []
@@ -168,7 +210,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3b8ef220598f1b74fa2b7978764fe9d1
+    spriteID: a5236925f80bb3a47b628cc43b9dc1c0
     vertices: []
     indices: 
     edges: []

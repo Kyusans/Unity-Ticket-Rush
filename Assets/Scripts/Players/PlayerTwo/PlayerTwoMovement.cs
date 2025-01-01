@@ -15,6 +15,8 @@ public class PlayerTwoMovement : MonoBehaviour
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
 
+    Animator animator;
+
     [Header("Events")]
     [Space]
 
@@ -23,6 +25,7 @@ public class PlayerTwoMovement : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
@@ -52,6 +55,9 @@ public class PlayerTwoMovement : MonoBehaviour
 
         // Check if Player 2 presses the "X" button (joystick 2 button 0)
         bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);  // Directly check the button press
+
+        animator.SetFloat("speed", Mathf.Abs(move));
+
 
         // Pass inputs to the Move function
         Move(move, jump);
