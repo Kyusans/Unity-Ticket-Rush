@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75934b146d2c9834fa4f551a2bbadd79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 400
+  m_JumpForce: 450
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_WhatIsGround:
@@ -301,10 +301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d82d70c15a9ab44e95a9380d9310bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 0}
-  horizontalMove: 0
-  runSpeed: 40
-  isJump: 0
 --- !u!95 &30542509
 Animator:
   serializedVersion: 3
@@ -400,7 +396,6 @@ GameObject:
   m_Component:
   - component: {fileID: 259275858}
   - component: {fileID: 259275860}
-  - component: {fileID: 259275864}
   - component: {fileID: 259275859}
   - component: {fileID: 259275863}
   - component: {fileID: 259275862}
@@ -440,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54171a59c21c07b499083e7c7cee2f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 400
+  m_JumpForce: 450
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_WhatIsGround:
@@ -449,7 +444,18 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 361917122}
   OnLandEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 259275859}
+        m_MethodName: onLanding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!212 &259275860
@@ -557,18 +563,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &259275864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 259275857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc00b5eaecdefce4bae2477bdf68d610, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMovement: {fileID: 259275859}
 --- !u!95 &259275865
 Animator:
   serializedVersion: 3

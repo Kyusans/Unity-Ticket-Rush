@@ -16,7 +16,7 @@ public class PlayerTwoMovement : MonoBehaviour
     private Vector3 m_Velocity = Vector3.zero;
 
     Animator animator;
-    
+
     [Header("Events")]
     [Space]
 
@@ -85,10 +85,17 @@ public class PlayerTwoMovement : MonoBehaviour
         if (m_Grounded && jump)
         {
             // Add a vertical force to the player
-            m_Grounded = false;
+            animator.SetBool("isJump", true);
+            m_Grounded = true;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }
     }
+
+    public void onLanding()
+    {
+        animator.SetBool("isJump", false);
+    }
+
 
     private void Flip()
     {
