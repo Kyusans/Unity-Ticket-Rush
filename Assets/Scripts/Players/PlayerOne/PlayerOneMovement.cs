@@ -8,12 +8,14 @@ public class PlayerOneMovement : MonoBehaviour
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
+	[SerializeField] private GameObject punchGameObject;
 	Animator animator;
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+	
 
 	[Header("Events")]
 	[Space]
@@ -83,6 +85,9 @@ public class PlayerOneMovement : MonoBehaviour
 		// Use unique input axes for Player 1
 		float move = Input.GetAxisRaw("Horizontal_P1"); // Use Player 1-specific horizontal axis
 		bool jump = Input.GetButtonDown("Jump_P1"); // Use Player 1-specific jump button
+		if(Input.GetButtonDown("Punch_P1")){
+			punchGameObject.SetActive(true);
+		}
 		animator.SetFloat("speed", Mathf.Abs(move));
 		Move(move, jump);
 	}
