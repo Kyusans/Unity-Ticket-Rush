@@ -9,6 +9,8 @@ public class PlayerTwoMovement : MonoBehaviour
     [SerializeField] private LayerMask m_WhatIsGround;                           // A mask determining what is ground to the character
     [SerializeField] private Transform m_GroundCheck;                            // A position marking where to check if the player is grounded.
 
+    [SerializeField] private GameObject punchGameObject;
+
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
     private Rigidbody2D m_Rigidbody2D;
@@ -48,22 +50,6 @@ public class PlayerTwoMovement : MonoBehaviour
             }
         }
     }
-    private void Update()
-    {
-        // Get input values for Player 2
-        float move = Input.GetAxis("Horizontal_P2"); // Player 2-specific horizontal axis
-
-        // Check if Player 2 presses the "X" button (joystick 2 button 0)
-        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);  // Directly check the button press
-
-        animator.SetFloat("speed", Mathf.Abs(move));
-        // animator.SetBool("isGrounded", m_Grounded);
-
-        // Pass inputs to the Move function
-        Move(move, jump);
-    }
-
-
 
     public void Move(float move, bool jump)
     {
@@ -106,5 +92,25 @@ public class PlayerTwoMovement : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    private void Update()
+    {
+        // Get input values for Player 2
+        float move = Input.GetAxis("Horizontal_P2"); // Player 2-specific horizontal axis
+
+        // Check if Player 2 presses the "X" button (joystick 2 button 0) circle 1, square 2, triangle 3
+        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);  // Directly check the button press
+
+        if (Input.GetKeyDown(KeyCode.Joystick2Button2))
+        {
+            // animator.SetTrigger("isPunch");
+            punchGameObject.SetActive(true);
+        }
+
+        animator.SetFloat("speed", Mathf.Abs(move));
+        // animator.SetBool("isGrounded", m_Grounded);
+
+        Move(move, jump);
     }
 }
