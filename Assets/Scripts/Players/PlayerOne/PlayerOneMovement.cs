@@ -90,5 +90,10 @@ public class PlayerOneMovement : MonoBehaviour
 		}
 		animator.SetFloat("speed", Mathf.Abs(move));
 		Move(move, jump);
+
+		if (transform.position.y < -8)
+		{
+			transform.position = new Vector3(-8, 0, transform.position.z);
+		}
 	}
 }
