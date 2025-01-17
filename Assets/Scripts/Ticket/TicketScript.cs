@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GemScript : MonoBehaviour
+public class TicketScript : MonoBehaviour
 {
 
 	private int player1Points = 0;
@@ -19,7 +19,6 @@ public class GemScript : MonoBehaviour
 	{
 		if (other.gameObject.tag == "Player1")
 		{
-			Debug.Log("Player 1 got the gem");
 			player1Points += 1;
 			PlayerPrefs.SetInt("Player1Points", player1Points);
 			PlayerPrefs.Save();
@@ -36,9 +35,10 @@ public class GemScript : MonoBehaviour
 		}
 	}
 
+
 	void goToLoadingScene()
 	{
-		SceneManager.LoadScene("LoadingScene");
+		SceneManager.LoadScene("LoadingScreen");
 	}
 
 }
