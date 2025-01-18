@@ -21,6 +21,7 @@ public class TicketScript : MonoBehaviour
 		{
 			player1Points += 1;
 			PlayerPrefs.SetInt("Player1Points", player1Points);
+			PlayerPrefs.SetInt("PlayerWon", 1);
 			PlayerPrefs.Save();
 			goToLoadingScene();
 			Destroy(gameObject);
@@ -29,12 +30,19 @@ public class TicketScript : MonoBehaviour
 		{
 			player2Points += 1;
 			PlayerPrefs.SetInt("Player2Points", player2Points);
+			PlayerPrefs.SetInt("PlayerWon", 2);
 			PlayerPrefs.Save();
 			goToLoadingScene();
 			Destroy(gameObject);
 		}
 	}
 
+	public void DeletePlayerPrefs()
+	{
+		PlayerPrefs.DeleteKey("Player1Points");
+		PlayerPrefs.DeleteKey("Player2Points");
+		PlayerPrefs.Save();
+	}
 
 	void goToLoadingScene()
 	{
