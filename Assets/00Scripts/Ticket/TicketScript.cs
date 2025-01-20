@@ -46,7 +46,7 @@ public class TicketScript : MonoBehaviour
 
 	void goToLoadingScene()
 	{
-		SceneManager.LoadScene("LoadingScreen");
+		SceneManager.LoadScene("01LoadingScreen");
 	}
 
 }

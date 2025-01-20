@@ -9,10 +9,10 @@ public class CountdownScript : MonoBehaviour
 	[SerializeField] Text countDownText, readyInText;
 	int stage = 0;
 
-	private void Awake()
+	private void Start()
 	{
 		stage = PlayerPrefs.GetInt("stage", 0);
-		PlayerPrefs.DeleteAll();
+		// PlayerPrefs.DeleteAll();
 	}
 	public void StartCountdown()
 	{
@@ -51,9 +51,12 @@ public class CountdownScript : MonoBehaviour
 				SceneManager.LoadScene("Finance");
 				break;
 			default:
+				SceneManager.LoadScene("RoofDeck");
+				PlayerPrefs.SetInt("stage", 0);
 				break;
 		}
 		stage++;
 		PlayerPrefs.SetInt("stage", stage);
+		Debug.Log("Stage: " + stage);
 	}
 }

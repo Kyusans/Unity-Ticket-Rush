@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
 
 	void Start()
 	{
-		player1Points = PlayerPrefs.GetInt("Player1Points");
-		player2Points = PlayerPrefs.GetInt("Player2Points");
+		player1Points = PlayerPrefs.GetInt("Player1Points", 0);
+		player2Points = PlayerPrefs.GetInt("Player2Points", 0);
 		player1PointsText.text = player1Points.ToString();
 		player2PointsText.text = player2Points.ToString();
 
