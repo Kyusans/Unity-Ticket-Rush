@@ -9,13 +9,6 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] Text player1PointsText, player2PointsText, player1ChatBox, player2ChatBox;
 	float player1Points, player2Points = 0;
-	int stage = 0;
-
-	private void Awake()
-	{
-		stage = PlayerPrefs.GetInt("stage", 0);
-		PlayerPrefs.DeleteAll();
-	}
 
 	void Start()
 	{
@@ -38,28 +31,5 @@ public class GameManager : MonoBehaviour
 			player2ChatBox.text = messages[randomNumber];
 		}
 		// PlayerPrefs.DeleteAll();
-	}
-
-	public void NextScene()
-	{
-		switch (stage)
-		{
-			case 0:
-				SceneManager.LoadScene("Library");
-				break;
-			case 1:
-				SceneManager.LoadScene("Bridge");
-				break;
-			case 2:
-				SceneManager.LoadScene("PHRooms");
-				break;
-			case 3:
-				SceneManager.LoadScene("Finance");
-				break;
-			default:
-				break;
-		}
-		stage++;
-		PlayerPrefs.SetInt("stage", stage);
 	}
 }
