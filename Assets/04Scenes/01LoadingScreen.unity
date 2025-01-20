@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDownText: {fileID: 643277521}
-  readyInText: {fileID: 0}
+  readyInText: {fileID: 480386235}
 --- !u!95 &377743303
 Animator:
   serializedVersion: 3
