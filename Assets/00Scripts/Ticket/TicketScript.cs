@@ -48,7 +48,4 @@ public class TicketScript : MonoBehaviour
 	{
 		blackBackgroundAnim.SetBool("closeBackground", true);
 	}
-
-
 }
-

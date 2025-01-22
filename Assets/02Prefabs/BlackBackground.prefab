@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222700411698694474}
   - component: {fileID: 114072826288474820}
   - component: {fileID: 95755684274077612}
+  - component: {fileID: 114255361774757112}
   m_Layer: 5
   m_Name: BlackBackground
   m_TagString: Untagged
@@ -74,6 +75,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114255361774757112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1428480223706210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330406dc52d9ca6458bec1724c38a8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222700411698694474
 CanvasRenderer:
   m_ObjectHideFlags: 1
