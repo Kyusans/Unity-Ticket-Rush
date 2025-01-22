@@ -38,7 +38,6 @@ public class CountdownScript : MonoBehaviour
 		readyInText.text = "Ready!";
 		countDownText.text = "";
 		blackScreenAnim.SetBool("closeBackground", true);
-
 		yield return new WaitForSeconds(2f);
 		NextScene();
 		isCountdownRunning = false;
