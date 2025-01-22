@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TicketScript : MonoBehaviour
 {
-
+	[SerializeField] Animator blackBackgroundAnim;
 	private int player1Points = 0;
 	private int player2Points = 0;
 
@@ -23,7 +23,7 @@ public class TicketScript : MonoBehaviour
 			PlayerPrefs.SetInt("Player1Points", player1Points);
 			PlayerPrefs.SetInt("PlayerWon", 1);
 			PlayerPrefs.Save();
-			goToLoadingScene();
+			closeBackground();
 			Destroy(gameObject);
 		}
 		else if (other.gameObject.tag == "Player2")
@@ -32,7 +32,7 @@ public class TicketScript : MonoBehaviour
 			PlayerPrefs.SetInt("Player2Points", player2Points);
 			PlayerPrefs.SetInt("PlayerWon", 2);
 			PlayerPrefs.Save();
-			goToLoadingScene();
+			closeBackground();
 			Destroy(gameObject);
 		}
 	}
@@ -44,10 +44,11 @@ public class TicketScript : MonoBehaviour
 		PlayerPrefs.Save();
 	}
 
-	void goToLoadingScene()
+	public void closeBackground()
 	{
-		SceneManager.LoadScene("01LoadingScreen");
+		blackBackgroundAnim.SetBool("closeBackground", true);
 	}
+
 
 }
 
