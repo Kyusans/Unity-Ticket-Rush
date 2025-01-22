@@ -1669,7 +1669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb3a8e58e68b1cb49861b27679bdc45a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBackgroundAnim: {fileID: 0}
+  blackBackgroundAnim: {fileID: 1974712949}
 --- !u!1 &1564172292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,5 +1961,10 @@ Prefab:
 --- !u!224 &1974712948 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224644889240021862, guid: 9f5d7b510a32d9641a16eb0fb1d5cf62,
+    type: 2}
+  m_PrefabInternal: {fileID: 1974712947}
+--- !u!95 &1974712949 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95755684274077612, guid: 9f5d7b510a32d9641a16eb0fb1d5cf62,
     type: 2}
   m_PrefabInternal: {fileID: 1974712947}
