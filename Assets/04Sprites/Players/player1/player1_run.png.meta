@@ -1,15 +1,27 @@
 fileFormatVersion: 2
 guid: 1338664462a6cf245923dfbd1b798b32
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: player1_run_0
-    21300002: player1_run_1
-    21300004: player1_run_2
-    21300006: player1_run_3
-    21300008: player1_run_4
-    21300010: player1_run_5
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: player1_run_0
+  - first:
+      213: 21300002
+    second: player1_run_1
+  - first:
+      213: 21300004
+    second: player1_run_2
+  - first:
+      213: 21300006
+    second: player1_run_3
+  - first:
+      213: 21300008
+    second: player1_run_4
+  - first:
+      213: 21300010
+    second: player1_run_5
   externalObjects: {}
-  serializedVersion: 5
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -26,7 +38,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -36,8 +53,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -58,11 +75,17 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 1024
     resizeAlgorithm: 0
@@ -72,8 +95,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 1024
     resizeAlgorithm: 0
@@ -83,7 +108,9 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -103,6 +130,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b81717066f9a3bc4e8e2b5b93a012968
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -123,6 +151,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 3a3ce6be4a6d6a74eb89fb79206dbf69
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -143,6 +172,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 720d8e48bc50deb4b9bdd4bcebeac5fd
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -163,6 +193,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: d1f9ff01e4503254cb969d84bfbb2a52
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -183,6 +214,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7d621c86ccf22a94d9aa521fb715ad8f
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -203,6 +235,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 62da5730f78b7614cb867b67e0f97b5e
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -211,11 +244,21 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: a5236925f80bb3a47b628cc43b9dc1c0
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-  spritePackingTag: 
+    secondaryTextures: []
+    nameFileIdTable:
+      player1_run_0: 21300000
+      player1_run_1: 21300002
+      player1_run_2: 21300004
+      player1_run_3: 21300006
+      player1_run_4: 21300008
+      player1_run_5: 21300010
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
