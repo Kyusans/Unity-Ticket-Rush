@@ -96,18 +96,34 @@ public class PlayerTwoMovement : MonoBehaviour
 
     private void Update()
     {
-        // Get input values for Player 2
-        float move = Input.GetAxis("Horizontal_P2"); // Player 2-specific horizontal axis
+        // // Get input values for Player 2
+        // float move = Input.GetAxis("Horizontal_P2"); // Player 2-specific horizontal axis
 
-        // Check if Player 2 presses the "X" button (joystick 2 button 0) circle 1, square 2, triangle 3
-        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);  // Directly check the button press
+        // // Check if Player 2 presses the "X" button (joystick 2 button 0) circle 1, square 2, triangle 3
+        // bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);  // Directly check the button press
 
-        if (Input.GetKeyDown(KeyCode.Joystick2Button2))
+        // if (Input.GetKeyDown(KeyCode.Joystick2Button2))
+        // {
+        //     // animator.SetTrigger("isPunch");
+        //     punchGameObject.SetActive(true);
+        // }
+
+        float move = Input.GetAxisRaw("Horizontal_P2");
+        bool jump = Input.GetButtonDown("");
+
+        if (jump)
         {
-            // animator.SetTrigger("isPunch");
+            Debug.Log("Player 1 Jump: " + Input.GetButtonDown("Jump_P1"));
+            Debug.Log("Player 2 Jump: " + Input.GetButtonDown("Jump_P2"));
+        }
+
+
+        if (Input.GetButtonDown("Punch_P2"))
+        {
             punchGameObject.SetActive(true);
         }
 
+        Move(move, jump);
         animator.SetFloat("speed", Mathf.Abs(move));
         // animator.SetBool("isGrounded", m_Grounded);
 

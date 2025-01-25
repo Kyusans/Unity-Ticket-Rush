@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+
 
 public class PlayerOneMovement : MonoBehaviour
 {
+		PlayerOneControls controls;
 	[SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
 	[Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f; // How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -15,7 +18,7 @@ public class PlayerOneMovement : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-	
+
 
 	[Header("Events")]
 	[Space]
@@ -23,6 +26,8 @@ public class PlayerOneMovement : MonoBehaviour
 
 	private void Awake()
 	{
+		controls = new PlayerOneControls();
+		controls.Gameplay.Jump.performed += ctx => Jump();
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 		if (OnLandEvent == null)
@@ -41,12 +46,11 @@ public class PlayerOneMovement : MonoBehaviour
 			{
 				m_Grounded = true;
 				if (!wasGrounded)
-					OnLandEvent.Invoke();
-			}
+					OnLandEvent.Invoke();			}
 		}
 	}
 
-	public void Move(float move, bool jump)
+	public void Move(float move)
 	{
 		if (m_Grounded || m_AirControl)
 		{
@@ -58,12 +62,14 @@ public class PlayerOneMovement : MonoBehaviour
 			else if (move < 0 && m_FacingRight)
 				Flip();
 		}
+	}
 
-		if (m_Grounded && jump)
+	void Jump(){
+		if (m_Grounded)
 		{
-			animator.SetBool("isJump", true);
-			m_Grounded = true;
+			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			animator.SetBool("isJump", true);
 		}
 	}
 
@@ -76,24 +82,37 @@ public class PlayerOneMovement : MonoBehaviour
 	}
 
 	public void onLanding()
-	{
-		animator.SetBool("isJump", false);
+	{		animator.SetBool("isJump", false);
+		Debug.Log("Landed");
 	}
 
 	private void Update()
 	{
 		// Use unique input axes for Player 1
-		float move = Input.GetAxisRaw("Horizontal_P1"); // Use Player 1-specific horizontal axis
-		bool jump = Input.GetButtonDown("Jump_P1"); // Use Player 1-specific jump button
-		if(Input.GetButtonDown("Punch_P1")){
+		float move = Input.GetAxisRaw("Horizontal_P1");
+		// bool jump = Input.GetButtonDown("Jump_P1");
+
+
+		if (Input.GetButtonDown("Punch_P1"))
+		{
 			punchGameObject.SetActive(true);
 		}
 		animator.SetFloat("speed", Mathf.Abs(move));
-		Move(move, jump);
+		Move(move);
 
 		if (transform.position.y < -8)
 		{
 			transform.position = new Vector3(-8, 0, transform.position.z);
 		}
+	}
+
+	void OnEnable()
+	{
+		controls.Gameplay.Enable();
+	}
+
+	void OnDisable()
+	{
+		controls.Gameplay.Disable();
 	}
 }

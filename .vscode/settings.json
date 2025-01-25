@@ -53,5 +53,5 @@
         "Temp/": true
     },
     "dotnet.preferCSharpExtension": true,
-    "dotnet.defaultSolution": "00Unity-Ticket-Rush.sln"
+    "dotnet.defaultSolution": "Unity-Ticket-Rush.sln"
 }
