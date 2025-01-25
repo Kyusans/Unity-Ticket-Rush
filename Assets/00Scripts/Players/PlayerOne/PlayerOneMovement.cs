@@ -5,18 +5,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerOneMovement : MonoBehaviour
 {
-		PlayerOneControls controls;
-	[SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
-	[Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f; // How much to smooth out the movement
-	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
-	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
-	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
+	PlayerOneControls controls;
+	[SerializeField] private float m_JumpForce = 400f;
+	[Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;
+	[SerializeField] private bool m_AirControl = false;
+	[SerializeField] private LayerMask m_WhatIsGround;
+	[SerializeField] private Transform m_GroundCheck;
 	[SerializeField] private GameObject punchGameObject;
 	Animator animator;
-	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-	private bool m_Grounded;            // Whether or not the player is grounded.
+	const float k_GroundedRadius = .2f;
+	private bool m_Grounded;
 	private Rigidbody2D m_Rigidbody2D;
-	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+	private bool m_FacingRight = true;
 	private Vector3 m_Velocity = Vector3.zero;
 
 
@@ -38,7 +38,6 @@ public class PlayerOneMovement : MonoBehaviour
 	{
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
-
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
 		for (int i = 0; i < colliders.Length; i++)
 		{
@@ -46,7 +45,8 @@ public class PlayerOneMovement : MonoBehaviour
 			{
 				m_Grounded = true;
 				if (!wasGrounded)
-					OnLandEvent.Invoke();			}
+					OnLandEvent.Invoke();
+			}
 		}
 	}
 
@@ -64,12 +64,12 @@ public class PlayerOneMovement : MonoBehaviour
 		}
 	}
 
-	void Jump(){
+	void Jump()
+	{
 		if (m_Grounded)
 		{
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-			animator.SetBool("isJump", true);
 		}
 	}
 
@@ -81,29 +81,24 @@ public class PlayerOneMovement : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
-	public void onLanding()
-	{		animator.SetBool("isJump", false);
-		Debug.Log("Landed");
-	}
 
-	private void Update()
+	void CheckPlayerFell()
 	{
-		// Use unique input axes for Player 1
-		float move = Input.GetAxisRaw("Horizontal_P1");
-		// bool jump = Input.GetButtonDown("Jump_P1");
-
-
-		if (Input.GetButtonDown("Punch_P1"))
-		{
-			punchGameObject.SetActive(true);
-		}
-		animator.SetFloat("speed", Mathf.Abs(move));
-		Move(move);
-
 		if (transform.position.y < -8)
 		{
 			transform.position = new Vector3(-8, 0, transform.position.z);
 		}
+	}
+
+	private void Update()
+	{
+		if (Input.GetButtonDown("Punch_P1"))
+		{
+			punchGameObject.SetActive(true);
+		}
+		animator.SetBool("isGrounded", m_Grounded);
+
+		CheckPlayerFell();
 	}
 
 	void OnEnable()
