@@ -16,7 +16,7 @@ public class PlayerOneMovement : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-	
+
 
 	[Header("Events")]
 	[Space]
@@ -77,14 +77,18 @@ public class PlayerOneMovement : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
-
+	void goBackToStart()
+	{
+		transform.position = new Vector2(playerX, playerY);
+	}
 
 	private void Update()
 	{
 		float move = Input.GetAxisRaw("Horizontal_P1");
-		bool jump = Input.GetButtonDown("Jump_P1"); 
+		bool jump = Input.GetButtonDown("Jump_P1");
 		animator.SetBool("isGrounded", m_Grounded);
-		if(Input.GetButtonDown("Punch_P1")){
+		if (Input.GetButtonDown("Punch_P1"))
+		{
 			punchGameObject.SetActive(true);
 		}
 		animator.SetFloat("speed", Mathf.Abs(move));
@@ -92,7 +96,15 @@ public class PlayerOneMovement : MonoBehaviour
 
 		if (transform.position.y < -20)
 		{
-			transform.position = new Vector3(playerX, playerY, 0);
+			goBackToStart();
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.CompareTag("Enemy"))
+		{
+			goBackToStart();
 		}
 	}
 }

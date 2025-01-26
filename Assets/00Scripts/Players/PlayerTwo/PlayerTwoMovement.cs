@@ -78,6 +78,11 @@ public class PlayerTwoMovement : MonoBehaviour
         transform.localScale = theScale;
     }
 
+    void goBackToStart()
+    {
+        transform.position = new Vector2(playerX, playerY);
+    }
+
 
     private void Update()
     {
@@ -93,10 +98,10 @@ public class PlayerTwoMovement : MonoBehaviour
             punchGameObject.SetActive(true);
         }
 
-        // if (transform.position.y < -20)
-        // {
-        //     transform.position = new Vector3(playerX, playerY, 0);
-        // }
+        if (transform.position.y < -20)
+        {
+            goBackToStart();
+        }
 
         animator.SetFloat("speed", Mathf.Abs(move));
         animator.SetBool("isGrounded", m_Grounded);

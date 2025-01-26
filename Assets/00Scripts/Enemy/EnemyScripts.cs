@@ -8,11 +8,14 @@ public class EnemyScripts : MonoBehaviour
   [SerializeField] float enemyLocalScale;
   Animator enemyAnim;
   Rigidbody2D enemyRB;
+  float enemyX, enemyY;
   float moveSpeeed = 6.0f;
   float attackRange = 10.0f;
 
   void Start()
   {
+    enemyX = transform.position.x;
+    enemyY = transform.position.y;
     enemyRB = GetComponent<Rigidbody2D>();
     enemyAnim = GetComponent<Animator>();
   }
@@ -20,6 +23,11 @@ public class EnemyScripts : MonoBehaviour
   void Update()
   {
     Transform closestPlayer = GetClosestPlayer();
+    if(transform.position.y < -30)
+    {
+      transform.position = new Vector2(enemyX, enemyY);
+    }
+    
     if (closestPlayer != null)
     {
       float distanceToPlayer = Vector2.Distance(transform.position, closestPlayer.position);
