@@ -23,7 +23,15 @@ public class TicketScript : MonoBehaviour
 			PlayerPrefs.SetInt("Player1Points", player1Points);
 			PlayerPrefs.SetInt("PlayerWon", 1);
 			PlayerPrefs.Save();
-			closeBackground();
+			Debug.Log("Player 1 Points: " + player1Points);
+			if (player1Points >= 3)
+			{
+				blackBackgroundAnim.SetBool("win", true);
+			}
+			else
+			{
+				closeBackground();
+			}
 			Destroy(gameObject);
 		}
 		else if (other.gameObject.tag == "Player2")
@@ -32,16 +40,18 @@ public class TicketScript : MonoBehaviour
 			PlayerPrefs.SetInt("Player2Points", player2Points);
 			PlayerPrefs.SetInt("PlayerWon", 2);
 			PlayerPrefs.Save();
-			closeBackground();
+			Debug.Log("Player 2 Points: " + player1Points);
+			if (player2Points >= 3)
+			{
+				blackBackgroundAnim.SetBool("win", true);
+				Destroy(gameObject);
+			}
+			else
+			{
+				closeBackground();
+			}
 			Destroy(gameObject);
 		}
-	}
-
-	public void DeletePlayerPrefs()
-	{
-		PlayerPrefs.DeleteKey("Player1Points");
-		PlayerPrefs.DeleteKey("Player2Points");
-		PlayerPrefs.Save();
 	}
 
 	public void closeBackground()
