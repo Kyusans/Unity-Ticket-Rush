@@ -3,21 +3,20 @@ using UnityEngine.Events;
 
 public class PlayerTwoMovement : MonoBehaviour
 {
-    PlayerTwoControls controls;
-    [SerializeField] private float m_JumpForce = 400f;
-    [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;
-    [SerializeField] private bool m_AirControl = false;
-    [SerializeField] private LayerMask m_WhatIsGround;
-    [SerializeField] private Transform m_GroundCheck;
+    [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
+    [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f; // How much to smooth out the movement
+    [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
+    [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
+    [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
     [SerializeField] private GameObject punchGameObject;
+    private float playerX, playerY;
     Animator animator;
-    const float k_GroundedRadius = .2f;
-    private bool m_Grounded;
+    const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+    private bool m_Grounded;            // Whether or not the player is grounded.
     private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;
+    private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
 
-    Vector2 moveInput;
 
     [Header("Events")]
     [Space]
@@ -25,12 +24,8 @@ public class PlayerTwoMovement : MonoBehaviour
 
     private void Awake()
     {
-        controls = new PlayerTwoControls();
-        controls.Gameplay.Jump.performed += ctx => Jump();
-        controls.Gameplay.Punch.performed += ctx => Punch();
-        controls.Gameplay.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        controls.Gameplay.Move.canceled += ctx => moveInput = Vector2.zero;
-
+        playerX = transform.position.x;
+        playerY = transform.position.y;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         if (OnLandEvent == null)
@@ -41,6 +36,7 @@ public class PlayerTwoMovement : MonoBehaviour
     {
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -51,57 +47,60 @@ public class PlayerTwoMovement : MonoBehaviour
                     OnLandEvent.Invoke();
             }
         }
-        Move(moveInput.x);
     }
 
-    public void Move(float move)
+    public void Move(float move, bool jump)
     {
-        animator.SetFloat("speed", Mathf.Abs(move));
         if (m_Grounded || m_AirControl)
         {
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+
             if (move > 0 && !m_FacingRight)
                 Flip();
             else if (move < 0 && m_FacingRight)
                 Flip();
         }
-    }
 
-    void Jump()
-    {
-        if (m_Grounded)
+        if (m_Grounded && jump)
         {
-            m_Grounded = false;
+            m_Grounded = true;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }
     }
 
     private void Flip()
     {
+        Debug.Log("Flipping direction");
         m_FacingRight = !m_FacingRight;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
     }
 
+
     private void Update()
     {
+        // Get input values for Player 2
+        float move = Input.GetAxis("Horizontal_P2"); // Player 2-specific horizontal axis
+
+        // Check if Player 2 presses the "X" button (joystick 2 button 0) circle 1, square 2, triangle 3
+        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);  // Directly check the button press
+
+        if (Input.GetKeyDown(KeyCode.Joystick2Button2))
+        {
+            // animator.SetTrigger("isPunch");
+            punchGameObject.SetActive(true);
+        }
+
+        // if (transform.position.y < -20)
+        // {
+        //     transform.position = new Vector3(playerX, playerY, 0);
+        // }
+
+        animator.SetFloat("speed", Mathf.Abs(move));
         animator.SetBool("isGrounded", m_Grounded);
-    }
 
-    void OnEnable()
-    {
-        controls.Gameplay.Enable();
-    }
-
-    void OnDisable()
-    {
-        controls.Gameplay.Disable();
-    }
-
-    void Punch()
-    {
-        punchGameObject.SetActive(true);
+        Move(move, jump);
     }
 }
