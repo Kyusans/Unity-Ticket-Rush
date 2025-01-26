@@ -78,7 +78,7 @@ public class PlayerOneMovement : MonoBehaviour
 
 	private void Update()
 	{
-		float move = Input.GetAxisRaw("Horizontal");
+		float move = Input.GetAxisRaw("Horizontal_P1");
 		bool jump = Input.GetButtonDown("Jump"); 
 		animator.SetBool("isGrounded", m_Grounded);
 		if(Input.GetButtonDown("Fire1")){
