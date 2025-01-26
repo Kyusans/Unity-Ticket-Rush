@@ -90,9 +90,9 @@ public class PlayerTwoMovement : MonoBehaviour
         float move = Input.GetAxis("Horizontal_P2"); // Player 2-specific horizontal axis
 
         // Check if Player 2 presses the "X" button (joystick 2 button 0) circle 1, square 2, triangle 3
-        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);  // Directly check the button press
+        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button1);  // Directly check the button press
 
-        if (Input.GetKeyDown(KeyCode.Joystick2Button2))
+        if (Input.GetKeyDown(KeyCode.Joystick2Button0))
         {
             // animator.SetTrigger("isPunch");
             punchGameObject.SetActive(true);
@@ -107,5 +107,13 @@ public class PlayerTwoMovement : MonoBehaviour
         animator.SetBool("isGrounded", m_Grounded);
 
         Move(move, jump);
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            goBackToStart();
+        }
     }
 }
