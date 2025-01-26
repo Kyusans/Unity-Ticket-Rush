@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
-public class PlayerTwoMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    PlayerTwoControls controls;
     [SerializeField] private float m_JumpForce = 400f;
-    [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;
+    [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;
     [SerializeField] private bool m_AirControl = false;
     [SerializeField] private LayerMask m_WhatIsGround;
     [SerializeField] private Transform m_GroundCheck;
     [SerializeField] private GameObject punchGameObject;
+    
     Animator animator;
     const float k_GroundedRadius = .2f;
     private bool m_Grounded;
@@ -17,7 +18,7 @@ public class PlayerTwoMovement : MonoBehaviour
     private bool m_FacingRight = true;
     private Vector3 m_Velocity = Vector3.zero;
 
-    Vector2 moveInput;
+    private Vector2 moveInput;
 
     [Header("Events")]
     [Space]
@@ -25,20 +26,39 @@ public class PlayerTwoMovement : MonoBehaviour
 
     private void Awake()
     {
-        controls = new PlayerTwoControls();
-        controls.Gameplay.Jump.performed += ctx => Jump();
-        controls.Gameplay.Punch.performed += ctx => Punch();
-        controls.Gameplay.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        controls.Gameplay.Move.canceled += ctx => moveInput = Vector2.zero;
-
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
     }
 
+    // Called by Player Input component
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed && m_Grounded)
+        {
+            m_Grounded = false;
+            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+        }
+    }
+
+    public void OnPunch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            punchGameObject.SetActive(true);
+        }
+    }
+
     private void FixedUpdate()
     {
+        // Ground check
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
@@ -51,6 +71,7 @@ public class PlayerTwoMovement : MonoBehaviour
                     OnLandEvent.Invoke();
             }
         }
+
         Move(moveInput.x);
     }
 
@@ -61,19 +82,11 @@ public class PlayerTwoMovement : MonoBehaviour
         {
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+
             if (move > 0 && !m_FacingRight)
                 Flip();
             else if (move < 0 && m_FacingRight)
                 Flip();
-        }
-    }
-
-    void Jump()
-    {
-        if (m_Grounded)
-        {
-            m_Grounded = false;
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }
     }
 
@@ -90,18 +103,11 @@ public class PlayerTwoMovement : MonoBehaviour
         animator.SetBool("isGrounded", m_Grounded);
     }
 
-    void OnEnable()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        controls.Gameplay.Enable();
-    }
-
-    void OnDisable()
-    {
-        controls.Gameplay.Disable();
-    }
-
-    void Punch()
-    {
-        punchGameObject.SetActive(true);
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            m_Grounded = true;
+        }
     }
 }
