@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerOneMovement : MonoBehaviour
@@ -61,7 +61,6 @@ public class PlayerOneMovement : MonoBehaviour
 
 		if (m_Grounded && jump)
 		{
-			animator.SetBool("isJump", true);
 			m_Grounded = true;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 		}
@@ -75,17 +74,14 @@ public class PlayerOneMovement : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
-	public void onLanding()
-	{
-		animator.SetBool("isJump", false);
-	}
+
 
 	private void Update()
 	{
-		// Use unique input axes for Player 1
-		float move = Input.GetAxisRaw("Horizontal_P1"); // Use Player 1-specific horizontal axis
-		bool jump = Input.GetButtonDown("Jump_P1"); // Use Player 1-specific jump button
-		if(Input.GetButtonDown("Punch_P1")){
+		float move = Input.GetAxisRaw("Horizontal");
+		bool jump = Input.GetButtonDown("Jump"); 
+		animator.SetBool("isGrounded", m_Grounded);
+		if(Input.GetButtonDown("Fire1")){
 			punchGameObject.SetActive(true);
 		}
 		animator.SetFloat("speed", Mathf.Abs(move));
