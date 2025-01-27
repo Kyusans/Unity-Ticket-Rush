@@ -45,6 +45,7 @@ public class CountdownScript : MonoBehaviour
 
 	public void NextScene()
 	{
+		stage += 1;
 		switch (stage)
 		{
 			case 1:
@@ -64,9 +65,7 @@ public class CountdownScript : MonoBehaviour
 				PlayerPrefs.SetInt("stage", 0);
 				break;
 		}
-
 		// Increment and save the stage.
-		stage += 1;
 		PlayerPrefs.SetInt("stage", stage);
 		Debug.Log("Stage: " + stage);
 	}

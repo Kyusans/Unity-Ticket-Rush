@@ -19,7 +19,7 @@ public class FunctionScrpts : MonoBehaviour
 
 	public void winner()
 	{
-		SceneManager.LoadScene("MainMenu");
+		SceneManager.LoadScene("WinScene");
 	}
 
 	// public void QuitGame()
