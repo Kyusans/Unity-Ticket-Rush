@@ -3,7 +3,7 @@ using UnityEngine;
 public class CrusherTrap : MonoBehaviour
 {
     float trapX, trapY;
-    float trapSpeed = 400f;
+    float trapSpeed = 375f;
     Rigidbody2D rb;
 
     bool fall = false;

@@ -44,14 +44,16 @@ public class TicketScript : MonoBehaviour
 			if (player2Points >= 3)
 			{
 				blackBackgroundAnim.SetBool("win", true);
-				Destroy(gameObject);
 			}
 			else
 			{
 				closeBackground();
 			}
-			Destroy(gameObject);
 		}
+		TimerHandler timerHandler = FindObjectOfType<TimerHandler>();
+		PlayerPrefs.SetInt("time", timerHandler.timeLeft);
+		Destroy(gameObject);
+
 	}
 
 	public void closeBackground()
