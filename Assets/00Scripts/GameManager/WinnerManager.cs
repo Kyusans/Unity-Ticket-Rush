@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WinnerManager : MonoBehaviour
 {
@@ -26,5 +27,18 @@ public class WinnerManager : MonoBehaviour
             youWinText.text = "Player 2 Wins!";
             player2.SetActive(true);
         }
+        StartCoroutine(LoadMainMenu());
+    }
+
+    IEnumerator LoadMainMenu()
+    {
+        yield return new WaitForSeconds(5);
+        goBackToMenu();
+    }
+
+    void goBackToMenu()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("MainMenu");
     }
 }
