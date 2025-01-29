@@ -9,6 +9,9 @@ public class PlayerOneMovement : MonoBehaviour
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
 	[SerializeField] private GameObject punchGameObject;
+	[SerializeField] private float punchCooldown = 1f;                          // Cooldown duration for punching
+	private float punchCooldownTimer;
+	private bool canPunch = true;
 	private float playerX, playerY;
 	Animator animator;
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -16,7 +19,6 @@ public class PlayerOneMovement : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-
 
 	[Header("Events")]
 	[Space]
@@ -87,16 +89,29 @@ public class PlayerOneMovement : MonoBehaviour
 		float move = Input.GetAxisRaw("Horizontal_P1");
 		bool jump = Input.GetButtonDown("Jump_P1");
 		animator.SetBool("isGrounded", m_Grounded);
-		if (Input.GetButtonDown("Punch_P1"))
-		{
-			punchGameObject.SetActive(true);
-		}
 		animator.SetFloat("speed", Mathf.Abs(move));
 		Move(move, jump);
 
 		if (transform.position.y < -20)
 		{
 			goBackToStart();
+		}
+
+		// Handle punch cooldown
+		if (!canPunch)
+		{
+			punchCooldownTimer -= Time.deltaTime;
+			if (punchCooldownTimer <= 0)
+			{
+				canPunch = true;
+			}
+		}
+
+		if (Input.GetButtonDown("Punch_P1") && canPunch)
+		{
+			punchGameObject.SetActive(true);
+			canPunch = false;
+			punchCooldownTimer = punchCooldown;
 		}
 	}
 

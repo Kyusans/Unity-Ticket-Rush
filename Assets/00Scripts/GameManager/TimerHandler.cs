@@ -37,6 +37,6 @@ public class TimerHandler : MonoBehaviour
     {
         int minutes = time / 60;
         int seconds = time % 60;
-        return minutes + ":" + seconds;
+        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
     }
 }

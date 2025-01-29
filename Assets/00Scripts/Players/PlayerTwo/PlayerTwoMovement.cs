@@ -17,6 +17,9 @@ public class PlayerTwoMovement : MonoBehaviour
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
 
+    private bool isPunchOnCooldown = false;
+    private float punchCooldownTimer = 0f;
+    [SerializeField] private float punchCooldownDuration = 1f;
 
     [Header("Events")]
     [Space]
@@ -83,19 +86,29 @@ public class PlayerTwoMovement : MonoBehaviour
         transform.position = new Vector2(playerX, playerY);
     }
 
-
     private void Update()
     {
         // Get input values for Player 2
         float move = Input.GetAxis("Horizontal_P2"); // Player 2-specific horizontal axis
 
         // Check if Player 2 presses the "X" button (joystick 2 button 0) circle 1, square 2, triangle 3
-        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button1);  // Directly check the button press
+        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);  // Directly check the button press
 
-        if (Input.GetKeyDown(KeyCode.Joystick2Button0))
+        if (isPunchOnCooldown)
+        {
+            punchCooldownTimer -= Time.deltaTime;
+            if (punchCooldownTimer <= 0f)
+            {
+                isPunchOnCooldown = false;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Joystick2Button2) && !isPunchOnCooldown)
         {
             // animator.SetTrigger("isPunch");
             punchGameObject.SetActive(true);
+            isPunchOnCooldown = true;
+            punchCooldownTimer = punchCooldownDuration;
         }
 
         if (transform.position.y < -20)
