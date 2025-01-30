@@ -1,4 +1,5 @@
-﻿﻿using UnityEngine;
+﻿﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerOneMovement : MonoBehaviour
@@ -9,7 +10,7 @@ public class PlayerOneMovement : MonoBehaviour
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
 	[SerializeField] private GameObject punchGameObject;
-	[SerializeField] private float punchCooldown = 1f;                          // Cooldown duration for punching
+	[SerializeField] private float punchCooldown = 0.5f;                          // Cooldown duration for punching
 	private float punchCooldownTimer;
 	private bool canPunch = true;
 	private float playerX, playerY;
@@ -112,6 +113,8 @@ public class PlayerOneMovement : MonoBehaviour
 			punchGameObject.SetActive(true);
 			canPunch = false;
 			punchCooldownTimer = punchCooldown;
+			animator.Play("Player1_Punch");
+			StartCoroutine(ResetPunch());
 		}
 	}
 
@@ -121,5 +124,12 @@ public class PlayerOneMovement : MonoBehaviour
 		{
 			goBackToStart();
 		}
+	}
+
+	private IEnumerator ResetPunch()
+	{
+		yield return new WaitForSeconds(0.1f); 
+		animator.Play("Player1_Idle");
+		punchGameObject.SetActive(false);
 	}
 }
