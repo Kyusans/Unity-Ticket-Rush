@@ -1,25 +1,26 @@
-﻿﻿using UnityEngine;
+﻿﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerTwoMovement : MonoBehaviour
 {
-    [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
-    [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f; // How much to smooth out the movement
-    [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
-    [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
-    [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
+    [SerializeField] private float m_JumpForce = 400f;
+    [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;
+    [SerializeField] private bool m_AirControl = false;
+    [SerializeField] private LayerMask m_WhatIsGround;
+    [SerializeField] private Transform m_GroundCheck;
     [SerializeField] private GameObject punchGameObject;
     private float playerX, playerY;
     Animator animator;
-    const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-    private bool m_Grounded;            // Whether or not the player is grounded.
+    const float k_GroundedRadius = .2f;
+    private bool m_Grounded;
     private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+    private bool m_FacingRight = true;
     private Vector3 m_Velocity = Vector3.zero;
 
     private bool isPunchOnCooldown = false;
     private float punchCooldownTimer = 0f;
-    [SerializeField] private float punchCooldownDuration = 1f;
+    [SerializeField] private float punchCooldown = 0.5f;  
 
     [Header("Events")]
     [Space]
@@ -88,11 +89,8 @@ public class PlayerTwoMovement : MonoBehaviour
 
     private void Update()
     {
-        // Get input values for Player 2
-        float move = Input.GetAxis("Horizontal_P2"); // Player 2-specific horizontal axis
-
-        // Check if Player 2 presses the "X" button (joystick 2 button 0) circle 1, square 2, triangle 3
-        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);  // Directly check the button press
+        float move = Input.GetAxis("Horizontal_P2");
+        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);
 
         if (isPunchOnCooldown)
         {
@@ -105,10 +103,11 @@ public class PlayerTwoMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Joystick2Button2) && !isPunchOnCooldown)
         {
-            // animator.SetTrigger("isPunch");
             punchGameObject.SetActive(true);
             isPunchOnCooldown = true;
-            punchCooldownTimer = punchCooldownDuration;
+            punchCooldownTimer = punchCooldown;
+            animator.Play("Player2_Punch"); 
+            StartCoroutine(ResetPunch()); 
         }
 
         if (transform.position.y < -20)
@@ -128,5 +127,12 @@ public class PlayerTwoMovement : MonoBehaviour
         {
             goBackToStart();
         }
+    }
+
+    private IEnumerator ResetPunch()
+    {
+        yield return new WaitForSeconds(0.1f);
+        animator.Play("Player2_Idle");
+        punchGameObject.SetActive(false);
     }
 }
