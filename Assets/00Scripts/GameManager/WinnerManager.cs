@@ -17,7 +17,11 @@ public class WinnerManager : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.GetInt("PlayerWon") == 1)
+        if(PlayerPrefs.GetInt("PlayerWon") == 0){
+            youWinText.text = "TIME'S UP";
+            youWinText.color = Color.red;
+        }
+        else if (PlayerPrefs.GetInt("PlayerWon") == 1)
         {
             youWinText.text = "Player 1 Wins!";
             player1.SetActive(true);

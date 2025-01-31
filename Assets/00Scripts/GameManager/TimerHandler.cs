@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 public class TimerHandler : MonoBehaviour
 {
     [SerializeField] Text timerText;
+    [SerializeField] Animator blackBackgroundAnim;
     public int timeLeft;
 
     void Start()
     {
-        timeLeft = PlayerPrefs.GetInt("time", 600);
+        timeLeft = PlayerPrefs.GetInt("time", 480);
         StartCoroutine(Countdown());
     }
 
@@ -23,20 +24,20 @@ public class TimerHandler : MonoBehaviour
             timeLeft--;
             timerText.text = minuteConverter(timeLeft);
         }
-        PlayerPrefs.SetInt("PlayerWon", 0);
         goBackToMenu();
+
     }
 
     void goBackToMenu()
     {
         PlayerPrefs.SetInt("PlayerWon", 0);
-        SceneManager.LoadScene("MainMenu");
+        blackBackgroundAnim.SetBool("win", true);
     }
 
     string minuteConverter(int time)
     {
         int minutes = time / 60;
         int seconds = time % 60;
-        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        return (minutes < 1 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
     }
 }
