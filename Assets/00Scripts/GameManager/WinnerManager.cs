@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class WinnerManager : MonoBehaviour
 {
     [SerializeField] GameObject player1, player2;
+    [SerializeField] Animator blackScreenAnimator;
     [SerializeField] Text youWinText;
 
     private void Awake()
@@ -37,12 +38,8 @@ public class WinnerManager : MonoBehaviour
     IEnumerator LoadMainMenu()
     {
         yield return new WaitForSeconds(5);
-        goBackToMenu();
+        blackScreenAnimator.SetBool("closeBackground", true);
     }
 
-    void goBackToMenu()
-    {
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("MainMenu");
-    }
+  
 }
