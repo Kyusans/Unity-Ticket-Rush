@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 1327024587}
   player2: {fileID: 1541054513}
+  blackScreenAnimator: {fileID: 1784221855}
   youWinText: {fileID: 1604115267}
 --- !u!4 &16544292
 Transform:
@@ -304,12 +305,17 @@ PrefabInstance:
     - target: {fileID: 224644889240021862, guid: 9f5d7b510a32d9641a16eb0fb1d5cf62,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -1820
+      value: -1887.6814
       objectReference: {fileID: 0}
     - target: {fileID: 224644889240021862, guid: 9f5d7b510a32d9641a16eb0fb1d5cf62,
         type: 3}
       propertyPath: m_SizeDelta.y
       value: -715
+      objectReference: {fileID: 0}
+    - target: {fileID: 224644889240021862, guid: 9f5d7b510a32d9641a16eb0fb1d5cf62,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 109.75123
       objectReference: {fileID: 0}
     - target: {fileID: 224644889240021862, guid: 9f5d7b510a32d9641a16eb0fb1d5cf62,
         type: 3}
@@ -349,7 +355,7 @@ PrefabInstance:
     - target: {fileID: 224644889240021862, guid: 9f5d7b510a32d9641a16eb0fb1d5cf62,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2699
+      value: -3945
       objectReference: {fileID: 0}
     - target: {fileID: 224644889240021862, guid: 9f5d7b510a32d9641a16eb0fb1d5cf62,
         type: 3}
@@ -810,6 +816,12 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 4, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!95 &1784221855 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95755684274077612, guid: 9f5d7b510a32d9641a16eb0fb1d5cf62,
+    type: 3}
+  m_PrefabInstance: {fileID: 434286353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2146354270
 GameObject:
   m_ObjectHideFlags: 0
