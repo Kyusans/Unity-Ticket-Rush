@@ -95,6 +95,10 @@ public class PlayerOneMovement : MonoBehaviour
 
 		if (transform.position.y < -20)
 		{
+			if(m_Rigidbody2D.gravityScale >= 100)
+			{
+				m_Rigidbody2D.gravityScale = 1.5f;
+			}
 			goBackToStart();
 		}
 
