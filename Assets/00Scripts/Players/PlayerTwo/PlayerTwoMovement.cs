@@ -20,7 +20,7 @@ public class PlayerTwoMovement : MonoBehaviour
 
     private bool isPunchOnCooldown = false;
     private float punchCooldownTimer = 0f;
-    [SerializeField] private float punchCooldown = 0.5f;  
+    [SerializeField] private float punchCooldown = 0.5f;
 
     [Header("Events")]
     [Space]
@@ -106,12 +106,16 @@ public class PlayerTwoMovement : MonoBehaviour
             punchGameObject.SetActive(true);
             isPunchOnCooldown = true;
             punchCooldownTimer = punchCooldown;
-            animator.Play("Player2_Punch"); 
-            StartCoroutine(ResetPunch()); 
+            animator.Play("Player2_Punch");
+            StartCoroutine(ResetPunch());
         }
 
         if (transform.position.y < -20)
         {
+            if (m_Rigidbody2D.gravityScale >= 100)
+            {
+                m_Rigidbody2D.gravityScale = 1.5f;
+            }
             goBackToStart();
         }
 
