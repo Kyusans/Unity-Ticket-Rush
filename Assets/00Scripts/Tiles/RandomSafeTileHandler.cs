@@ -5,8 +5,6 @@ using UnityEngine;
 public class RandomSafeTileHandler : MonoBehaviour
 {
     [SerializeField] private GameObject[] tiles;
-    [SerializeField] private GameObject tileObject;
-
 
     private void Start()
     {
@@ -14,16 +12,16 @@ public class RandomSafeTileHandler : MonoBehaviour
         tiles[randomTileIndex].tag = "TrapTile";
     }
 
-    public void disableTileObject()
+    public void disableTileObject(GameObject tileObject)
     {
         tileObject.SetActive(false);
-        Debug.Log("Disable");
-        StartCoroutine(enableTileObject());
+        StartCoroutine(enableTileObject(tileObject));
     }
 
-    IEnumerator enableTileObject()
+    IEnumerator enableTileObject(GameObject tileObject)
     {
         yield return new WaitForSeconds(1.2f);
         tileObject.SetActive(true);
+        Debug.Log("Enabled TileObject: " + tileObject.name);
     }
 }
