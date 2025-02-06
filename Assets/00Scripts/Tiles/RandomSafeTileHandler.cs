@@ -17,6 +17,7 @@ public class RandomSafeTileHandler : MonoBehaviour
     public void disableTileObject()
     {
         tileObject.SetActive(false);
+        Debug.Log("Disable");
         StartCoroutine(enableTileObject());
     }
 
