@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
 		player1PointsText.text = player1Points.ToString();
 		player2PointsText.text = player2Points.ToString();
 
-		int randomNumber = Random.Range(0, 5);
-		string[] messages = new string[] { "ggez", "mao rato?", "boring", "uninstall", "banga", "HAHAHAHA" };
+		int randomNumber = Random.Range(0, 7);
+		string[] messages = new string[] { "ez", "mao rato?", "boring", "tarunga pud", "haha banga", "HAHAHAHAHA", "?" };
 
 		if (PlayerPrefs.GetInt("PlayerWon") == 1)
 		{

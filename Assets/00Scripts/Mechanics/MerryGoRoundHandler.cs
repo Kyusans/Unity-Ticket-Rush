@@ -7,7 +7,7 @@ public class MerryGoRoundHandler : MonoBehaviour
     AudioSource[] audioSource;
     [SerializeField] GameObject coins, player1, player2;
     [SerializeField] Text p1CoinCollectedText, p2CoinCollectedText, p1TimerText, p2TimerText;
-    
+
     int p1CoinCollected, p2CoinCollected = 0;
     float minimumTime = 7f;
     float maximumTime = 9f;
@@ -50,10 +50,10 @@ public class MerryGoRoundHandler : MonoBehaviour
             p2CoinCollectedText.gameObject.SetActive(false);
             p1TimerText.gameObject.SetActive(false);
             p2TimerText.gameObject.SetActive(false);
-            
+
             p1CoinCollected = 0;
             p2CoinCollected = 0;
-            
+
             audioSource[1].Stop();
             audioSource[0].Play();
 
@@ -72,7 +72,7 @@ public class MerryGoRoundHandler : MonoBehaviour
                 Destroy(spawnedCoins);
                 spawnedCoins = null;
             }
-            
+
             spawnedCoins = Instantiate(coins, transform.position, Quaternion.identity);
 
             p1CoinCollectedText.gameObject.SetActive(true);
@@ -92,11 +92,13 @@ public class MerryGoRoundHandler : MonoBehaviour
                 Destroy(spawnedCoins);
                 spawnedCoins = null;
             }
-            if(p1CoinCollected < coinsNeeded)
+            if (p1CoinCollected < coinsNeeded)
             {
                 player1.transform.position = new Vector2(player1x, player1y);
                 audioSource[2].Play();
-            }else if(p2CoinCollected < coinsNeeded)
+            }
+
+            if (p2CoinCollected < coinsNeeded)
             {
                 player2.transform.position = new Vector2(player2x, player2y);
                 audioSource[2].Play();
