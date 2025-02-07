@@ -21,6 +21,8 @@ public class PlayerOneMovement : MonoBehaviour
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 
+	AudioSource audioSource;
+
 	[Header("Events")]
 	[Space]
 	public UnityEvent OnLandEvent;
@@ -33,6 +35,11 @@ public class PlayerOneMovement : MonoBehaviour
 		animator = GetComponent<Animator>();
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
+	}
+
+	void Start()
+	{
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	private void FixedUpdate()
@@ -82,6 +89,7 @@ public class PlayerOneMovement : MonoBehaviour
 
 	void goBackToStart()
 	{
+		audioSource.Play();
 		transform.position = new Vector2(playerX, playerY);
 	}
 
@@ -92,13 +100,13 @@ public class PlayerOneMovement : MonoBehaviour
 		animator.SetBool("isGrounded", m_Grounded);
 		animator.SetFloat("speed", Mathf.Abs(move));
 		Move(move, jump);
-
 		if (transform.position.y < -20)
 		{
-			if(m_Rigidbody2D.gravityScale >= 100)
+			if (m_Rigidbody2D.gravityScale >= 100)
 			{
 				m_Rigidbody2D.gravityScale = 1.5f;
 			}
+			audioSource.Play();
 			goBackToStart();
 		}
 
@@ -132,7 +140,7 @@ public class PlayerOneMovement : MonoBehaviour
 
 	private IEnumerator ResetPunch()
 	{
-		yield return new WaitForSeconds(0.1f); 
+		yield return new WaitForSeconds(0.1f);
 		animator.Play("Player1_Idle");
 		punchGameObject.SetActive(false);
 	}

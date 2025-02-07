@@ -22,6 +22,8 @@ public class PlayerTwoMovement : MonoBehaviour
     private float punchCooldownTimer = 0f;
     [SerializeField] private float punchCooldown = 0.5f;
 
+    AudioSource audioSource;
+
     [Header("Events")]
     [Space]
     public UnityEvent OnLandEvent;
@@ -34,6 +36,11 @@ public class PlayerTwoMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
+    }
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -85,6 +92,7 @@ public class PlayerTwoMovement : MonoBehaviour
     void goBackToStart()
     {
         transform.position = new Vector2(playerX, playerY);
+        audioSource.Play();
     }
 
     private void Update()
