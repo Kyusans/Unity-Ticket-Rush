@@ -43,7 +43,7 @@ public class WinnerManager : MonoBehaviour
 
     IEnumerator LoadMainMenu()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         blackScreenAnimator.SetBool("closeBackground", true);
     }
 
