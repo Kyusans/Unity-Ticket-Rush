@@ -1,63 +1,87 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TicketScript : MonoBehaviour
 {
-	[SerializeField] Animator blackBackgroundAnim;
-	private int player1Points = 0;
-	private int player2Points = 0;
+    [SerializeField] Animator blackBackgroundAnim;
+    private int player1Points = 0;
+    private int player2Points = 0;
 
-	void Start()
-	{
-		player1Points = PlayerPrefs.GetInt("Player1Points", 0);
-		player2Points = PlayerPrefs.GetInt("Player2Points", 0);
-	}
+    AudioSource audioSource;
+    BoxCollider2D boxCollider;
+    SpriteRenderer spriteRenderer;
 
-	void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.gameObject.tag == "Player1")
-		{
-			player1Points += 1;
-			PlayerPrefs.SetInt("Player1Points", player1Points);
-			PlayerPrefs.SetInt("PlayerWon", 1);
-			PlayerPrefs.Save();
-			Debug.Log("Player 1 Points: " + player1Points);
-			if (player1Points >= 3)
-			{
-				blackBackgroundAnim.SetBool("win", true);
-			}
-			else
-			{
-				closeBackground();
-			}
-			Destroy(gameObject);
-		}
-		else if (other.gameObject.tag == "Player2")
-		{
-			player2Points += 1;
-			PlayerPrefs.SetInt("Player2Points", player2Points);
-			PlayerPrefs.SetInt("PlayerWon", 2);
-			PlayerPrefs.Save();
-			Debug.Log("Player 2 Points: " + player1Points);
-			if (player2Points >= 3)
-			{
-				blackBackgroundAnim.SetBool("win", true);
-			}
-			else
-			{
-				closeBackground();
-			}
-		}
-		TimerHandler timerHandler = FindObjectOfType<TimerHandler>();
-		PlayerPrefs.SetInt("time", timerHandler.timeLeft);
-		Destroy(gameObject);
+    private bool hasBeenCollected = false; 
 
-	}
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        player1Points = PlayerPrefs.GetInt("Player1Points", 0);
+        player2Points = PlayerPrefs.GetInt("Player2Points", 0);
+    }
 
-	public void closeBackground()
-	{
-		blackBackgroundAnim.SetBool("closeBackground", true);
-	}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (hasBeenCollected) return; 
+
+        if (other.gameObject.CompareTag("Player1"))
+        {
+            CollectTicket(1);
+        }
+        else if (other.gameObject.CompareTag("Player2"))
+        {
+            CollectTicket(2);
+        }
+    }
+
+    void CollectTicket(int playerNumber)
+    {
+        hasBeenCollected = true;
+        boxCollider.enabled = false;
+        audioSource.Play();
+
+        if (playerNumber == 1)
+        {
+            player1Points++;
+            PlayerPrefs.SetInt("Player1Points", player1Points);
+            PlayerPrefs.SetInt("PlayerWon", 1);
+            Debug.Log("Player 1 Points: " + player1Points);
+        }
+        else if (playerNumber == 2)
+        {
+            player2Points++;
+            PlayerPrefs.SetInt("Player2Points", player2Points);
+            PlayerPrefs.SetInt("PlayerWon", 2);
+            Debug.Log("Player 2 Points: " + player2Points);
+        }
+
+        PlayerPrefs.Save();
+
+        if ((playerNumber == 1 && player1Points >= 3) || (playerNumber == 2 && player2Points >= 3))
+        {
+            blackBackgroundAnim.SetBool("win", true);
+        }
+        else
+        {
+            CloseBackground();
+        }
+
+        DisableComponents();
+    }
+
+    void DisableComponents()
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = false;
+        }
+    }
+
+    public void CloseBackground()
+    {
+        blackBackgroundAnim.SetBool("closeBackground", true);
+    }
 }

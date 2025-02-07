@@ -4,9 +4,11 @@ public class CoinScript : MonoBehaviour
 {
     private bool isCollected = false;
     private MerryGoRoundHandler merryGoRoundHandler;
+    AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         merryGoRoundHandler = FindObjectOfType<MerryGoRoundHandler>(); 
     }
 
@@ -22,7 +24,7 @@ public class CoinScript : MonoBehaviour
             {
                 merryGoRoundHandler.AddCoinCollected(other.gameObject.tag);
             }
-
+            audioSource.Play();
             GetComponent<Collider2D>().enabled = false; 
             Destroy(gameObject, 0.1f); 
         }
