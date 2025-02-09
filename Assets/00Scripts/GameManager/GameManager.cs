@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
+	[SerializeField] GameObject player1Win, player2Win, player1Lose, player2Lose;
 	[SerializeField] Text player1PointsText, player2PointsText, player1ChatBox, player2ChatBox;
 	float player1Points, player2Points = 0;
 
@@ -18,17 +18,22 @@ public class GameManager : MonoBehaviour
 		player2PointsText.text = player2Points.ToString();
 
 		int randomNumber = Random.Range(0, 7);
-		string[] messages = new string[] { "ez", "mao rato?", "boring", "tarunga pud", "haha banga", "HAHAHAHAHA", "?" };
+		string[] messages = new string[] { "ez", "partida wa ko naninood", "boring", "tarunga pud", "haha banga", "HAHAHAHAHA", "??" };
 
 		if (PlayerPrefs.GetInt("PlayerWon") == 1)
 		{
+
 			player2ChatBox.text = "";
 			player1ChatBox.text = messages[randomNumber];
+			player1Win.SetActive(true);
+			player2Lose.SetActive(true);
 		}
 		else if (PlayerPrefs.GetInt("PlayerWon") == 2)
 		{
 			player1ChatBox.text = "";
 			player2ChatBox.text = messages[randomNumber];
+			player2Win.SetActive(true);
+			player1Lose.SetActive(true);
 		}
 		// PlayerPrefs.DeleteAll();
 	}

@@ -10,7 +10,7 @@ public class PlayerOneMovement : MonoBehaviour
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
 	[SerializeField] private GameObject punchGameObject;
-	[SerializeField] private float punchCooldown = 0.5f;                          // Cooldown duration for punching
+	[SerializeField] private float punchCooldown = 0f;                          // Cooldown duration for punching
 	private float punchCooldownTimer;
 	private bool canPunch = true;
 	private float playerX, playerY;

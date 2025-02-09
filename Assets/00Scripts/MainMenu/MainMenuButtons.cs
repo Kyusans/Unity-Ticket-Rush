@@ -7,6 +7,7 @@ public class ButtonFunctions : MonoBehaviour
     [SerializeField] Animator blackScreenAnim;
     public void PlayGame()
     {
+		PlayerPrefs.DeleteAll();
         blackScreenAnim.SetBool("closeBackground", true);
     }
 

@@ -20,7 +20,7 @@ public class PlayerTwoMovement : MonoBehaviour
 
     private bool isPunchOnCooldown = false;
     private float punchCooldownTimer = 0f;
-    [SerializeField] private float punchCooldown = 0.5f;
+    [SerializeField] private float punchCooldown = 0f;
 
     AudioSource audioSource;
 
