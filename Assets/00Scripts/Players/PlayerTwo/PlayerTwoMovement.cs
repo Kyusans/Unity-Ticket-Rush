@@ -1,9 +1,11 @@
 ﻿﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class PlayerTwoMovement : MonoBehaviour
 {
+    PlayerTwoControls controls;
     [SerializeField] private float m_JumpForce = 400f;
     [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;
     [SerializeField] private bool m_AirControl = false;
@@ -30,6 +32,9 @@ public class PlayerTwoMovement : MonoBehaviour
 
     private void Awake()
     {
+        controls = new PlayerTwoControls();
+        controls.Gameplay.Jump.performed += ctx => Jump();
+        controls.Gameplay.Punch.performed += ctx => Punch();
         playerX = transform.position.x;
         playerY = transform.position.y;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -60,7 +65,7 @@ public class PlayerTwoMovement : MonoBehaviour
         }
     }
 
-    public void Move(float move, bool jump)
+    public void Move(float move)
     {
         if (m_Grounded || m_AirControl)
         {
@@ -73,10 +78,28 @@ public class PlayerTwoMovement : MonoBehaviour
                 Flip();
         }
 
-        if (m_Grounded && jump)
+    }
+
+    public void Jump()
+    {
+        Debug.Log("Jumping");
+        if (m_Grounded)
         {
-            m_Grounded = true;
+            m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+        }
+    }
+
+    public void Punch()
+    {
+        Debug.Log("Punching");
+        if (!isPunchOnCooldown)
+        {
+            punchGameObject.SetActive(true);
+            isPunchOnCooldown = true;
+            punchCooldownTimer = punchCooldown;
+            animator.Play("Player2_Punch");
+            StartCoroutine(ResetPunch());
         }
     }
 
@@ -109,15 +132,6 @@ public class PlayerTwoMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Joystick2Button2) && !isPunchOnCooldown)
-        {
-            punchGameObject.SetActive(true);
-            isPunchOnCooldown = true;
-            punchCooldownTimer = punchCooldown;
-            animator.Play("Player2_Punch");
-            StartCoroutine(ResetPunch());
-        }
-
         if (transform.position.y < -20)
         {
             if (m_Rigidbody2D.gravityScale >= 100)
@@ -130,7 +144,7 @@ public class PlayerTwoMovement : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(move));
         animator.SetBool("isGrounded", m_Grounded);
 
-        Move(move, jump);
+        Move(move);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -147,4 +161,15 @@ public class PlayerTwoMovement : MonoBehaviour
         animator.Play("Player2_Idle");
         punchGameObject.SetActive(false);
     }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
 }
