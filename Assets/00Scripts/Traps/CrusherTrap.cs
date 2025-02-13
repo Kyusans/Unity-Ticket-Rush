@@ -8,7 +8,6 @@ public class CrusherTrap : MonoBehaviour
 
     bool fall = false;
 
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
