@@ -47,16 +47,16 @@ public class TicketScript : MonoBehaviour
         {
             player1Points++;
             PlayerPrefs.SetInt("Player1Points", player1Points);
-            PlayerPrefs.SetInt("PlayerWon", 1);
-            Debug.Log("Player 1 Points: " + player1Points);
+            PlayerPrefs.SetInt("PlayerWon", 2);
         }
         else if (playerNumber == 2)
         {
             player2Points++;
             PlayerPrefs.SetInt("Player2Points", player2Points);
             PlayerPrefs.SetInt("PlayerWon", 2);
-            Debug.Log("Player 2 Points: " + player2Points);
         }
+        TimerHandler timerHandler = FindObjectOfType<TimerHandler>();
+        PlayerPrefs.SetInt("time", timerHandler.timeLeft);
 
         PlayerPrefs.Save();
 
