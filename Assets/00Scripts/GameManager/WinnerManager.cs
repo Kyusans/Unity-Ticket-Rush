@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class WinnerManager : MonoBehaviour
 {
-    [SerializeField] GameObject player1, player2;
+    [SerializeField] GameObject player1, player2, fish;
     [SerializeField] Animator blackScreenAnimator;
     [SerializeField] Text youWinText;
     AudioSource[] audioSource;
@@ -23,6 +23,7 @@ public class WinnerManager : MonoBehaviour
         if (PlayerPrefs.GetInt("PlayerWon") == 0)
         {
             audioSource[1].Play();
+            fish.SetActive(false);
             youWinText.text = "TIME'S UP";
             youWinText.color = Color.red;
         }

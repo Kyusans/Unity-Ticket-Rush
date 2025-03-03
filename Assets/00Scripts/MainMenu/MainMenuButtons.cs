@@ -5,6 +5,12 @@ using UnityEngine;
 public class ButtonFunctions : MonoBehaviour
 {
     [SerializeField] Animator blackScreenAnim;
+
+    private void Start() {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     public void PlayGame()
     {
 		PlayerPrefs.DeleteAll();
@@ -18,6 +24,6 @@ public class ButtonFunctions : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quit Game");
+        Application.Quit();
     }
 }

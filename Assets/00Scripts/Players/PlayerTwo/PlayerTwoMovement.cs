@@ -25,6 +25,7 @@ public class PlayerTwoMovement : MonoBehaviour
     [SerializeField] private float punchCooldown = 0f;
 
     AudioSource audioSource;
+    Vector2 moveInput;
 
     [Header("Events")]
     [Space]
@@ -35,6 +36,8 @@ public class PlayerTwoMovement : MonoBehaviour
         controls = new PlayerTwoControls();
         controls.Gameplay.Jump.performed += ctx => Jump();
         controls.Gameplay.Punch.performed += ctx => Punch();
+        controls.Gameplay.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Move.canceled += ctx => moveInput = Vector2.zero;
         playerX = transform.position.x;
         playerY = transform.position.y;
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -63,10 +66,12 @@ public class PlayerTwoMovement : MonoBehaviour
                     OnLandEvent.Invoke();
             }
         }
+        Move(moveInput.x);
     }
 
     public void Move(float move)
     {
+        animator.SetFloat("speed", Mathf.Abs(move));
         if (m_Grounded || m_AirControl)
         {
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
@@ -120,8 +125,8 @@ public class PlayerTwoMovement : MonoBehaviour
 
     private void Update()
     {
-        float move = Input.GetAxis("Horizontal_P2");
-        bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);
+        // float move = Input.GetAxis("Horizontal_P2");
+        // bool jump = Input.GetKeyDown(KeyCode.Joystick2Button0);
 
         if (isPunchOnCooldown)
         {
@@ -141,10 +146,10 @@ public class PlayerTwoMovement : MonoBehaviour
             goBackToStart();
         }
 
-        animator.SetFloat("speed", Mathf.Abs(move));
+        // animator.SetFloat("speed", Mathf.Abs(move));
         animator.SetBool("isGrounded", m_Grounded);
 
-        Move(move);
+        // Move(move);
     }
 
     void OnCollisionEnter2D(Collision2D other)

@@ -47,7 +47,7 @@ public class TicketScript : MonoBehaviour
         {
             player1Points++;
             PlayerPrefs.SetInt("Player1Points", player1Points);
-            PlayerPrefs.SetInt("PlayerWon", 2);
+            PlayerPrefs.SetInt("PlayerWon", 1);
         }
         else if (playerNumber == 2)
         {
@@ -55,8 +55,8 @@ public class TicketScript : MonoBehaviour
             PlayerPrefs.SetInt("Player2Points", player2Points);
             PlayerPrefs.SetInt("PlayerWon", 2);
         }
-        TimerHandler timerHandler = FindObjectOfType<TimerHandler>();
-        PlayerPrefs.SetInt("time", timerHandler.timeLeft);
+        // TimerHandler timerHandler = FindObjectOfType<TimerHandler>();
+        // PlayerPrefs.SetInt("time", timerHandler.timeLeft);
 
         PlayerPrefs.Save();
 

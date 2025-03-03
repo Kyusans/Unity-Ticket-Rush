@@ -63,7 +63,7 @@ public class MerryGoRoundHandler : MonoBehaviour
             timeLeft = 10;
             StartCountdown();
 
-            coinsNeeded = Random.Range(3, 5);
+            coinsNeeded = Random.Range(2, 4);
             p1CoinCollectedText.text = p1CoinCollected + "/" + coinsNeeded + " Coins";
             p2CoinCollectedText.text = p2CoinCollected + "/" + coinsNeeded + " Coins";
 

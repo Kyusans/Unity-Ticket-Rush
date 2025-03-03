@@ -20,5 +20,9 @@ public class AudioManager : MonoBehaviour
     {
         audioSource[1].Play();
     }
+
+    public void playTileAudioFinance(){
+        audioSource[0].Play();
+    }
     
 }

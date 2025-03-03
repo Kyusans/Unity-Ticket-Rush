@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/03Scenes/MainMenu.unity
+    guid: 28767f421510bf4458e42de9aab0f1f4
+  - enabled: 1
     path: Assets/03Scenes/RoofDeck.unity
     guid: 4f2fef2442749964381fbce9619a9aa1
   - enabled: 1
@@ -21,9 +24,6 @@ EditorBuildSettings:
     path: Assets/03Scenes/Finance.unity
     guid: 7d41e03a8eb4ad84aa4ce9d7d1b185ab
   - enabled: 1
-    path: Assets/03Scenes/MainMenu.unity
-    guid: 28767f421510bf4458e42de9aab0f1f4
-  - enabled: 1
     path: Assets/03Scenes/00GameTemplate.unity
     guid: a92d469b2c7046e46b8a11ec6be9726b
   - enabled: 1
@@ -35,4 +35,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/03Scenes/01LoadingScreen.unity
     guid: dc6b4daef8fa98f4d900aa9f12aef1f9
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 264b90da0a60951499897c7bc8f3c332,
+      type: 3}

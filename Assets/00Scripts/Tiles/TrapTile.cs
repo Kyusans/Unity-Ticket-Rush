@@ -19,7 +19,6 @@ public class TrapTile : MonoBehaviour
             {
                 Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
                 rb.gravityScale += 100;
-
                 GameObject tileObject = transform.parent.gameObject;
                 RandomSafeTileHandler randomSafeTileHandler = FindObjectOfType<RandomSafeTileHandler>();
                 randomSafeTileHandler.disableTileObject(tileObject);

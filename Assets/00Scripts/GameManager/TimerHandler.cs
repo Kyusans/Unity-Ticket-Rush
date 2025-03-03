@@ -12,7 +12,7 @@ public class TimerHandler : MonoBehaviour
 
     void Start()
     {
-        timeLeft = PlayerPrefs.GetInt("time", 240);
+        timeLeft = PlayerPrefs.GetInt("time", 120);
         StartCoroutine(Countdown());
     }
 
